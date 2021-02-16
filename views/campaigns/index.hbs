@@ -1,0 +1,11 @@
+<h1>{{ title }}</h1>
+<p><a href="/campaigns/add">Add a new Note</a></p>
+<p>Here is a listing of Campaigns</p>
+
+<ul>
+    {{#each campaignlist}}
+        <li>
+            {{key}}: <a href="campaigns/view?key={{key}}">{{title}}</a>            
+        </li>
+    {{/each}}
+</ul>
