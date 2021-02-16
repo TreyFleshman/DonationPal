@@ -23,10 +23,10 @@ module.exports = class Note {
   get desc() { return this [_campaign_desc]; }
 
 
-  set key(newKey) { this[_campaign_key]; }
-  set title(newTitle) { this[_campaign_title]; }
-  set fund_amt(newFund_amt) { this[_campaign_fund_amt]; }
-  set min_don(newMin_don) { this[_campaign_min_don]; }
-  set desc(newDesc) { [this_campaign_desc]; }
+  set key(newKey) { this[_campaign_key] = newKey; }
+  set title(newTitle) { this[_campaign_title] = newTitle; }
+  set fund_amt(newFund_amt) { this[_campaign_fund_amt] = newFund_amt; }
+  set min_don(newMin_don) { this[_campaign_min_don] = newMin_don; }
+  set desc(newDesc) { this [_campaign_desc] = newDesc; }
 
 };

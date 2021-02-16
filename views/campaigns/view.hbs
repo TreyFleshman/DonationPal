@@ -1,10 +1,11 @@
-<h1> {{ title }} </h1>
-
-<p>Key: {{ campaignkey }} </p>
-
-<p> ${{ fund_amt }} </p>
-
-<p> ${{ min_don }} </p>
-
-<p> {{ desc }} </p>
-
+<div class="card dm" style="width: 24rem; margin: auto;">
+  <div class="card-header" style="text-align: center;">
+    <h2>{{ title }}</h2>
+  </div>
+  <ul class="list-group list-group-flush">
+    <h6 class="list-group-item"><b>Key:</b> {{ key }}</h6>
+    <h6 class="list-group-item"><b>Funding Ammount:</b> ${{ fund_amt }}</h6>
+    <h6 class="list-group-item"><b>Minimum Donation Ammount:</b> ${{ min_don }}</h6>
+    <h6 class="list-group-item"><b>Description:</b> {{ desc }}</h6>
+  </ul>
+</div>

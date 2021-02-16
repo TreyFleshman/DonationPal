@@ -19,7 +19,7 @@ router.get('/', async function(req, res, next) {
 /* GET sinlge campaign. */
 router.get('/view', async function(req, res, next) {
   var campaign = await campaigns.read(req.query.key);
-  res.render('campaigns/view', { title: campaign.title, campaignkey: campaign.key, fund_amt: campaign.fund_amt,min_don: campaign.min_don, desc: campaign.desc });
+  res.render('campaigns/view', { title: campaign.title, key: campaign.key, fund_amt: campaign.fund_amt,min_don: campaign.min_don, desc: campaign.desc });
 });
 
 /* GET to the add campaign form */
