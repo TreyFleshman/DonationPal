@@ -1,11 +1,35 @@
 <h1>{{ title }}</h1>
-<p><a href="/campaigns/add">Add a new Note</a></p>
-<p>Here is a listing of Campaigns</p>
+<button type="button" class="btn btn-primary" style="border-radius: 20px;">
+    <img src="../images/add.png" style="height: 24px; width: 24px;"/>
+    <a class="nav-link text-white" href="/campaigns/add" style="display: inline;">
+    Campaign
+    </a>
+</button>
 
-<ul>
+<br/> <br/>
+
+<h3 style="text-align: center;">Here is a listing of Campaigns</h3>
+
+<br/>
+
+<table class="table" style="width: 500px; margin: auto" >
+    <thead>
+        <tr>
+            <th scope="col">Key</th>
+            <th scope="col">Title</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
     {{#each campaignlist}}
-        <li>
-            {{key}}: <a href="campaigns/view?key={{key}}">{{title}}</a>            
-        </li>
+        <tbody>
+            <tr>
+                <th scope="row">{{key}}</th>
+                <td>{{title}}</td>
+                <td><a href="campaigns/view?key={{key}}">
+                    <img src="../images/open-link.png" style="height: 24px; width: 24px;"/>
+                </a></td>
+            </tr>
+        </tbody>
     {{/each}}
-</ul>
+
+</table>
