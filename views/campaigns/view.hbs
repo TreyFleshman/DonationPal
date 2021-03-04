@@ -8,7 +8,7 @@
     <h6 class="list-group-item"><b>Campaign Start Date:</b> {{ campaign.start_date }}</h6>
     <h6 class="list-group-item"><b>Campaign End Date:</b> {{ campaign.end_date }}</h6>
     <h6 class="list-group-item">
-    <a href="" class="del-btn">
+    <a href="/campaigns/delete?_id={{ campaign._id }}" class="del-btn">
         <img src="../images/delete.png" style="height: 28px; width: 28px;"/>
     </a>
     <button type="button" class="btn btn-primary donate-btn" style="border-radius: 20px; margin:auto;">

@@ -22,7 +22,7 @@ router.get('/view', (req, res, next) => {
   
   Campaign.findOne({
       _id: req.query._id
-  })
+  })  
   .then( campaign => {
       res.render('campaigns/view', {
         title: campaign ? campaign.title: "",
@@ -39,6 +39,43 @@ router.get('/add', (req, res, next) => {
       docreate: true,
       key: "", campaign: undefined
   });
+});
+
+/* Edit / Update a document */ 
+/*
+EmailModel
+  .findOneAndUpdate(
+    {
+      email: 'ada.lovelace@gmail.com'  // search query
+    }, 
+    {
+      email: 'theoutlander@live.com'   // field:values to update
+    },
+    {
+      new: true,                       // return updated doc
+      runValidators: true              // validate before update
+    })
+  .then(doc => {
+    console.log(doc)
+  })
+  .catch(err => {
+    console.error(err)
+  })
+*/
+
+/* Delete Campaign */
+router.get('/delete', (req, res, next) => {
+  
+  Campaign.deleteOne({
+      _id: req.query._id
+  })  
+  .then( campaign => {
+      res.render('campaigns/delete', {
+        title: campaign ? campaign.title: "",
+        key: req.query._id,
+        campaign: campaign
+      });
+  })
 });
 
 
