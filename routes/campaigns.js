@@ -32,14 +32,15 @@ router.get('/view', (req, res, next) => {
   })
 });
 
-/* GET to the add/edit campaign form */
-router.get('/add', (req, res, next) => {
+/* GET to the add campaign form */
+router.get('/add', (req, res, next) => {    
   res.render('campaigns/edit',{
       title: "Add a Campaign",
       docreate: true,
       key: "", campaign: undefined
   });
 });
+
 
 /* POST */
 router.post('/save', (req,res,next) => {
@@ -59,7 +60,7 @@ router.post('/save', (req,res,next) => {
       .catch( err => console.log(err) )
 
   }else {
-    console.log('Editing Note!')
+    console.log('Editing Campaign!')
   }
 
 });
