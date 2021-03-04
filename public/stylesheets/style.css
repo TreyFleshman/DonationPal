@@ -6,3 +6,18 @@ body {
 a {
   color: #00B7FF;
 }
+
+.del-btn{
+    float: left;
+}
+
+.edit-btn{
+    float: right;
+}
+
+.donate-btn{
+    width: 140px;
+    text-align: center;
+    position: relative;
+    left: 25%;
+}

@@ -3,9 +3,23 @@
     <h2>{{ title }}</h2>
   </div>
   <ul class="list-group list-group-flush">
-    <h6 class="list-group-item"><b>Key:</b> {{ key }}</h6>
-    <h6 class="list-group-item"><b>Funding Ammount:</b> ${{ fund_amt }}</h6>
-    <h6 class="list-group-item"><b>Minimum Donation Ammount:</b> ${{ min_don }}</h6>
-    <h6 class="list-group-item"><b>Description:</b> {{ desc }}</h6>
+    <h6 class="list-group-item"><b>Description:</b>  {{ campaign.desc }}</h6>
+    <h6 class="list-group-item"><b>Funding Goal:</b> ${{ campaign.goal }}</h6>
+    <h6 class="list-group-item"><b>Campaign Start Date:</b> {{ campaign.start_date }}</h6>
+    <h6 class="list-group-item"><b>Campaign End Date:</b> {{ campaign.end_date }}</h6>
+    <h6 class="list-group-item">
+    <a href="" class="del-btn">
+        <img src="../images/delete.png" style="height: 28px; width: 28px;"/>
+    </a>
+    <button type="button" class="btn btn-primary donate-btn" style="border-radius: 20px; margin:auto;">
+        <img src="../images/add.png" style="height: 24px; width: 24px;"/>
+        <a class="nav-link text-white" href="" style="display: inline;">
+            Donate
+        </a>
+    </button>
+    <a href="" class="edit-btn">
+        <img src="../images/edit.png" style="height: 24px; width: 24px;"/>
+    </a></div>
+    </h6>
   </ul>
 </div>

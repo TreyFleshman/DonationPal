@@ -1,40 +1,68 @@
 var express = require('express');
 var router = express.Router();
 const campaigns = require('../models/campaigns-memory');
+const dateFormat = require('dateformat');
+
+const mongoose = require('mongoose');
+require('../models/Campaign');
+const Campaign = mongoose.model('Campaigns');
 
 /* GET listing of all campaigns */
-router.get('/', async function(req, res, next) {
+router.get('/', (req, res, next) => {
 
-  let keylist = await campaigns.keylist();
-  let keyPromise = keylist.map( key => {
-      return campaigns.read(key);
+  Campaign.find({})
+  .sort({start_date: 'asc'})
+  .then( campaigns => {
+    res.render('campaigns/index', { title: "Listed Campaigns", campaignlist: campaigns})
   });
+});
 
-  let campaignlist = await Promise.all(keyPromise);
+/* GET sinlge campaign */
+router.get('/view', (req, res, next) => {
   
-
-  res.render('campaigns/index', { title: "Campaigns", campaignlist: campaignlist });
+  Campaign.findOne({
+      _id: req.query._id
+  })
+  .then( campaign => {
+      res.render('campaigns/view', {
+        title: campaign ? campaign.title: "",
+        key: req.query._id,
+        campaign: campaign
+      });
+  })
 });
 
-/* GET sinlge campaign. */
-router.get('/view', async function(req, res, next) {
-  var campaign = await campaigns.read(req.query.key);
-  res.render('campaigns/view', { title: campaign.title, key: campaign.key, fund_amt: campaign.fund_amt,min_don: campaign.min_don, desc: campaign.desc });
+/* GET to the add/edit campaign form */
+router.get('/add', (req, res, next) => {
+  res.render('campaigns/edit',{
+      title: "Add a Campaign",
+      docreate: true,
+      key: "", campaign: undefined
+  });
 });
 
-/* GET to the add campaign form */
-router.get('/add', function(req, res, next){
-  res.render('campaigns/edit', { title: "Add a Campaign" });
+/* POST */
+router.post('/save', (req,res,next) => {
+  if (req.body.docreate === 'create') {
+      console.log('Creating a new campaign!')    
+      const newCampaign = new Campaign( {
+          title: req.body.title,
+          desc: req.body.desc,
+          goal: req.body.goal,
+          start_date: dateFormat(req.body.start_date, "fullDate"),
+          end_date: dateFormat(req.body.end_date, "fullDate")
+      } );
+      newCampaign
+      .save()
+      .then( () => console.log('Campaign Saved!') )
+      .then( () => { res.redirect('/campaigns/view?_id=' + newCampaign._id) } )
+      .catch( err => console.log(err) )
+
+  }else {
+    console.log('Editing Note!')
+  }
+
 });
 
-/* POST to a add a new campaign */
-router.post('/save', async (req, res, next) => {
-  // logic to save a new campaign.
-
-  var campaign;
-  campaign = await campaigns.create(req.body.key, req.body.title, req.body.fund_amt, req.body.min_don, req.body.desc);
-  res.redirect('/campaigns/view?key=' + req.body.key);
-  console.log("Saving a new campaign.");
-});
 
 module.exports = router;

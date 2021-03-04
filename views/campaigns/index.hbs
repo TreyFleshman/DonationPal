@@ -17,17 +17,17 @@
 <table class="table" style="width: 500px; margin: auto" >
     <thead>
         <tr>
-            <th scope="col">Key</th>
             <th scope="col">Title</th>
+            <th scope="col">Funding Goal</th>
             <th scope="col"></th>
         </tr>
     </thead>
     {{#each campaignlist}}
         <tbody>
             <tr>
-                <th scope="row">{{key}}</th>
-                <td>{{title}}</td>
-                <td><a href="campaigns/view?key={{key}}">
+                <th scope="row">{{title}}</th>
+                <td>${{goal}}.00</td>
+                <td><a href="campaigns/view?_id={{ this._id }}">
                     <img src="../images/open-link.png" style="height: 24px; width: 24px;"/>
                 </a></td>
             </tr>
