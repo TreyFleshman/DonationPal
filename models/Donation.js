@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const DonationSchema = new Schema( {
+     rel_id: {
+        type: Schema.Types.ObjectId,
+        ref: "Campaign"
+    },
     message: {
         type: String,
         required: true,

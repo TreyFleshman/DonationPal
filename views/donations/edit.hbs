@@ -29,6 +29,13 @@
             <span class="input-group-text">.00</span>
         </div>
 
+        <select class="form-select" name='rel_id' aria-label="Default select example">
+            <option selected>Select a campaign to donate to</option>
+            {{#each campaignlist}}
+            <option value="{{this._id}}">{{title}}</option>
+            {{/each}}
+        </select>
+
         <br/>
 
         <!--

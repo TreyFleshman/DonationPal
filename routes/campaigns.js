@@ -35,9 +35,11 @@ router.get('/view', (req, res, next) => {
 
 /* GET sinlge campaign THEN Update Document */
 router.get('/update', (req, res, next) => {
+
   Campaign.findOne({
       _id: req.query._id
   })
+  
   .then( campaign => {
       res.render('campaigns/update', {
         key: req.query._id,

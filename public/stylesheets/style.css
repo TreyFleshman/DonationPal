@@ -24,6 +24,9 @@ a {
 
 .don-btn{
     width: auto;
+}
+
+.icon{
     position: relative;
-    left: 675px;
+    bottom: 8px;
 }
