@@ -31,7 +31,7 @@ router.get('/view', (req, res, next) => {
   })
 });
 
-/* GET to the add/edit donation form */
+/* GET to the add donation form */
 router.get('/add', (req, res, next) => {
   res.render('donations/edit',{
       title: "Submit a Donation",
@@ -47,7 +47,8 @@ router.post('/save', (req,res,next) => {
       const newDonation = new Donation( {
           message: req.body.message,
           don_amt: req.body.don_amt,
-          date: dateFormat(req.body.date, "fullDate")
+          date: dateFormat(req.body.date, "fullDate"),
+          campaign_id: campaigns._id
       } );
       newDonation
       .save()

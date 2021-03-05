@@ -2,21 +2,24 @@
 
 <div class="card text-center" style="width: 750px; margin: auto;">
   <div class="card-header">
-    <h4>Add a new campaign</h4>
+    <h4>Update a campaign</h4>
   </div>
   <div class="card-body">
 
-    <form method="POST" action="/campaigns/save" style="width: 600px; margin: auto;">
+    <form method="POST" action="/campaigns/save-update" style="width: 600px; margin: auto;">
 
     {{#if docreate}}
         <input type="hidden" name="docreate" value="create">
     {{else}}
         <input type="hidden" name="docreate" value="update">
-    {{/if}}   
+    {{/if}} 
+    
+        <input type="hidden" name="_id" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" 
+            value= "{{#if campaign }}{{campaign._id}}{{/if}}" required>      
 
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Title</span>            
-            <input type="text" name="title" class="form-control" placeholder='' aria-label="Username" aria-describedby="basic-addon1" 
+            <input type="text" name="title" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" 
             value= "{{#if campaign }}{{campaign.title}}{{/if}}" required>
         </div>
 

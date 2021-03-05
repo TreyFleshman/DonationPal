@@ -32,6 +32,33 @@ router.get('/view', (req, res, next) => {
   })
 });
 
+/* GET sinlge campaign THEN Update Document */
+router.get('/update', (req, res, next) => {
+  Campaign.findOne({
+      _id: req.query._id
+  })
+  .then( campaign => {
+      res.render('campaigns/update', {
+        key: req.query._id,
+        campaign: campaign
+      });
+  }) 
+  .catch( err => console.log(err) ) 
+});
+
+/* POST Update */
+router.post('/save-update', (req, res, next) => {
+    Campaign.findOneAndUpdate({_id: req.body._id }, {
+        title: req.body.title,
+        desc: req.body.desc,
+        goal: req.body.goal,
+        start_date: dateFormat(req.body.start_date, "fullDate"),
+        end_date: dateFormat(req.body.end_date, "fullDate")
+    })
+    .then( () => { res.redirect('/campaigns/view?_id=' + req.body._id) } )
+    .catch( err => console.log(err) )  
+});
+
 /* GET to the add campaign form */
 router.get('/add', (req, res, next) => {    
   res.render('campaigns/edit',{
@@ -40,28 +67,6 @@ router.get('/add', (req, res, next) => {
       key: "", campaign: undefined
   });
 });
-
-/* Edit / Update a document */ 
-/*
-EmailModel
-  .findOneAndUpdate(
-    {
-      email: 'ada.lovelace@gmail.com'  // search query
-    }, 
-    {
-      email: 'theoutlander@live.com'   // field:values to update
-    },
-    {
-      new: true,                       // return updated doc
-      runValidators: true              // validate before update
-    })
-  .then(doc => {
-    console.log(doc)
-  })
-  .catch(err => {
-    console.error(err)
-  })
-*/
 
 /* Delete Campaign */
 router.get('/delete', (req, res, next) => {

@@ -5,12 +5,12 @@ const Schema = mongoose.Schema;
 const DonationSchema = new Schema( {
     message: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     don_amt: {
         type: Number,
-        required: true,
-        trim: true
+        required: true
     },
     date: {
         type: String,
