@@ -8,7 +8,7 @@ require('../models/Donation');
 const Donation = mongoose.model('Donations');
 
 /* GET listing of all donations */
-router.get('/', (req, res, next) => {
+router.get('/index', (req, res, next) => {
 
   Donation.find({})
   .sort({date: 'asc'})

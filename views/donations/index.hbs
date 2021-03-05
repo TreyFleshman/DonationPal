@@ -1,0 +1,20 @@
+<table class="table" style="width: 500px; margin: auto" >
+    <thead>
+        <tr>
+            <th scope="col">Message</th>
+            <th scope="col">Donation Amount</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    {{#each donationlist}}
+        <tbody>
+            <tr>
+                <th scope="row">{{message}}</th>
+                <td>${{don_amt}}.00</td>
+                <td><a href="/donations/view?_id={{ this._id }}">
+                    <img src="../images/open-link.png" style="height: 24px; width: 24px;"/>
+                </a></td>
+            </tr>
+        </tbody>
+    {{/each}}
+</table>

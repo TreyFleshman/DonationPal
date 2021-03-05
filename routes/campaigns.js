@@ -22,14 +22,15 @@ router.get('/view', (req, res, next) => {
   
   Campaign.findOne({
       _id: req.query._id
-  })  
+    })
+
   .then( campaign => {
       res.render('campaigns/view', {
         title: campaign ? campaign.title: "",
         key: req.query._id,
-        campaign: campaign
+        campaign: campaign 
       });
-  })
+    })
 });
 
 /* GET sinlge campaign THEN Update Document */
@@ -82,7 +83,6 @@ router.get('/delete', (req, res, next) => {
       });
   })
 });
-
 
 /* POST */
 router.post('/save', (req,res,next) => {
