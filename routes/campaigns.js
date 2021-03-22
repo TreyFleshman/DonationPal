@@ -6,6 +6,19 @@ const dateFormat = require('dateformat');
 const mongoose = require('mongoose');
 require('../models/Campaign');
 const Campaign = mongoose.model('Campaigns');
+require('../models/Donation');
+const Donation = mongoose.model('Donations');
+
+// Middlewear to report auth status
+const ensureAuth = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    // authenticated
+    next();
+  } else {
+    res.render('users/not_auth')
+  }
+}
+
 
 /* GET listing of all campaigns */
 router.get('/', (req, res, next) => {
@@ -20,12 +33,29 @@ router.get('/', (req, res, next) => {
 /* GET sinlge campaign */
 router.get('/view', (req, res, next) => {
   
+  Campaign.findOne({ _id: req.query._id })
+  .then( campaign => {
+      Donation.find({ rel_id: req.query._id })
+      .then( donations => { 
+      res.render('campaigns/view', {
+        title: campaign ? campaign.title: "",
+        key: req.query._id,
+        campaign: campaign,
+        donationList: donations 
+      });
+    })
+  })
+});
+
+/* GET sinlge campaign - User */
+router.get('/user-view', (req, res, next) => {
+  
   Campaign.findOne({
       _id: req.query._id
     })
 
   .then( campaign => {
-      res.render('campaigns/view', {
+      res.render('users/user_view', {
         title: campaign ? campaign.title: "",
         key: req.query._id,
         campaign: campaign 
@@ -34,7 +64,7 @@ router.get('/view', (req, res, next) => {
 });
 
 /* GET sinlge campaign THEN Update Document */
-router.get('/update', (req, res, next) => {
+router.get('/update', ensureAuth, (req, res, next) => {
 
   Campaign.findOne({
       _id: req.query._id
@@ -50,8 +80,9 @@ router.get('/update', (req, res, next) => {
 });
 
 /* POST Update */
-router.post('/save-update', (req, res, next) => {
+router.post('/save-update', ensureAuth, (req, res, next) => {
     Campaign.findOneAndUpdate({_id: req.body._id }, {
+        creator_id: req.user.providerID,
         title: req.body.title,
         desc: req.body.desc,
         goal: req.body.goal,
@@ -63,7 +94,7 @@ router.post('/save-update', (req, res, next) => {
 });
 
 /* GET to the add campaign form */
-router.get('/add', (req, res, next) => {    
+router.get('/add', ensureAuth, (req, res, next) => {    
   res.render('campaigns/edit',{
       title: "Add a Campaign",
       docreate: true,
@@ -72,13 +103,13 @@ router.get('/add', (req, res, next) => {
 });
 
 /* Delete Campaign */
-router.get('/delete', (req, res, next) => {
+router.get('/delete', ensureAuth, (req, res, next) => {
   
   Campaign.deleteOne({
       _id: req.query._id
   })  
   .then( campaign => {
-      res.render('campaigns/delete', {
+      res.render('users/user-delete', {
         title: campaign ? campaign.title: "",
         key: req.query._id,
         campaign: campaign
@@ -87,10 +118,11 @@ router.get('/delete', (req, res, next) => {
 });
 
 /* POST */
-router.post('/save', (req,res,next) => {
+router.post('/save', ensureAuth, (req,res,next) => {
   if (req.body.docreate === 'create') {
       console.log('Creating a new campaign!')    
       const newCampaign = new Campaign( {
+          creator_id: req.user.providerID,
           title: req.body.title,
           desc: req.body.desc,
           goal: req.body.goal,

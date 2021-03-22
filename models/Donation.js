@@ -7,6 +7,10 @@ const DonationSchema = new Schema( {
         type: Schema.Types.ObjectId,
         ref: "Campaign"
     },
+    creator_id: {
+        type: String,
+        required: true
+    },
     message: {
         type: String,
         required: true,

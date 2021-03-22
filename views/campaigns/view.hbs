@@ -10,18 +10,37 @@
     <h6 class="list-group-item"><b>Campaign Start Date:</b> {{ campaign.start_date }}</h6>
     <h6 class="list-group-item"><b>Campaign End Date:</b> {{ campaign.end_date }}</h6>
     <h6 class="list-group-item">
-    <a href="/campaigns/delete?_id={{ campaign._id }}" class="del-btn">
-        <img src="../images/delete.png" style="height: 28px; width: 28px;"/>
+    <a class="btn btn-primary donate-btn" href="/donations/add" style="border-radius: 20px;">
+      <img src="../images/add.png" style="height: 24px; width: 24px; float: left;"/>
+        Donate
     </a>
-    <button type="button" class="btn btn-primary donate-btn" style="border-radius: 20px;">
-        <img src="../images/add.png" style="height: 24px; width: 24px;"/>
-            <a class="nav-link text-white" href="/donations/add" style="display: inline;">
-                Donate
-            </a>
-    </button>
-    <a href="/campaigns/update?_id={{ campaign._id }}" class="edit-btn">
-        <img src="../images/edit.png" style="height: 24px; width: 24px;"/>
-    </a></div>
     </h6>
   </ul>
 </div>
+
+<br/>
+
+<h3 style="text-align: center;">Donations</h3>
+
+<br/>
+
+<table class="table" style="width: 500px; margin: auto" >
+    <thead>
+        <tr>
+            <th scope="col">Message</th>
+            <th scope="col">Donation Amount</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    {{#each donationList}}
+        <tbody>
+            <tr>
+                <th scope="row">{{message}}</th>
+                <td>${{don_amt}}.00</td>
+                <td><a href="/donations/view?_id={{ this._id }}">
+                    <img src="../images/open-link.png" style="height: 24px; width: 24px;"/>
+                </a></td>
+            </tr>
+        </tbody>
+    {{/each}}
+</table>

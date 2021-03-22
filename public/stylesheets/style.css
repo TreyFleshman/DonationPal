@@ -19,6 +19,13 @@ a {
     width: 140px;
     text-align: center;
     position: relative;
+    left: 32.5%;
+}
+
+.user-donate-btn{
+    width: 140px;
+    text-align: center;
+    position: relative;
     left: 25%;
 }
 
@@ -29,4 +36,43 @@ a {
 .icon{
     position: relative;
     bottom: 8px;
+}
+
+.col-md-4{
+    padding: 5px;
+}
+
+.profile-img{ 
+    border: 3px solid black;
+}
+
+.not-auth{
+  width: 400px;
+  padding: 5px;
+  border: 1px solid #333333;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.not-auth-body{
+    float: right;
+    text-align: center;
+    position: relative;
+    top: 65px;
+    right: 40px;
+}
+
+.doc-del{
+  text-align: center;
+  padding: 10px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }

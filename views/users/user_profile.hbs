@@ -1,0 +1,73 @@
+<h1>{{title}}</h1>
+
+<div class="card mb-3" style="max-width: 850px; margin:auto;">
+  <div class="row g-0">
+    <div class="col-md-4" style="width:150px;">
+      <img class="profile-img" src="{{ userImage }}" style="border-radius: 65px;"/>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h3 class="card-title"><strong>{{ displayName }}'s Profile</strong></h3>
+        <p class="card-text">{{ email }}</p>
+
+        <br/>
+
+        <div style="border: 1px solid black; padding: 5px;">
+            <h4>{{ displayName }}'s Campaigns</h4>
+
+            <table class="table" style="width: 500px; margin: auto" >
+            <thead>
+                <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Funding Goal</th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+            {{#each campaignList}}
+            <tbody>
+                <tr>
+                <th scope="row">{{title}}</th>
+                <td>${{goal}}.00</td>
+                <td><a href="/campaigns/user-view?_id={{ this._id }}">
+                <img src="../images/open-link.png" style="height: 24px; width: 24px;"/>
+                </a></td>
+                </tr>
+            </tbody>
+            {{/each}}
+            </table>
+        </div>
+
+        <br/>
+
+        <div style="border: 1px solid black; padding: 5px;">
+            <h4>{{ displayName }}'s Donations</h4>
+
+            <table class="table" style="width: 500px; margin: auto" >
+              <thead>
+                <tr>
+                  <th scope="col">Message</th>
+                  <th scope="col">Donaiton Ammount</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+            {{#each donationList}}
+            <tbody>
+              <tr>
+                <th scope="row">{{message}}</th>
+                <td>${{don_amt}}.00</td>
+                <td><a href="/donations/view?_id={{ this._id }}">
+                    <img src="../images/open-link.png" style="height: 24px; width: 24px;"/>
+                </a></td>
+              </tr>
+            </tbody>
+            {{/each}}
+            </table>
+        </div>
+
+        <br/>
+
+        <a class="btn btn-outline-success" href="/users/logout">Log Out</a></small>
+      </div>
+    </div>
+  </div>
+</div>

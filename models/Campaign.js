@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const CampaignSchema = new Schema( {
+    creator_id: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true

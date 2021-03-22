@@ -10,6 +10,16 @@ const Donation = mongoose.model('Donations');
 require('../models/Campaign');
 const Campaign = mongoose.model('Campaigns');
 
+// Middlewear to report auth status
+const ensureAuth = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    // authenticated
+    next();
+  } else {
+    res.render('users/not_auth')
+  }
+}
+
 /* GET listing of all donations */
 router.get('/', (req, res, next) => {
 
@@ -35,7 +45,7 @@ router.get('/view', (req, res, next) => {
 });
 
 /* GET to the add donation form */
-router.get('/add', (req, res, next) => {
+router.get('/add', ensureAuth, (req, res, next) => {
   Campaign.find({})
 .then( campaigns => {
   res.render('donations/edit',{
@@ -49,11 +59,12 @@ router.get('/add', (req, res, next) => {
 });
 
 /* POST */
-router.post('/save', (req,res,next) => {
+router.post('/save', ensureAuth, (req,res,next) => {
   if (req.body.docreate === 'create') {
       console.log('Submitting a new donation!')
       const newDonation = new Donation( {
           rel_id: req.body.rel_id,
+          creator_id: req.user.providerID,
           message: req.body.message,
           don_amt: req.body.don_amt,
           date: dateFormat(req.body.date, "fullDate"),

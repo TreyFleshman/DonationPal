@@ -6,24 +6,61 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 
+var passport = require('passport');
+var GoogleStrategy = require ('passport-google-oauth').OAuth2Strategy; 
+
 var indexRouter = require('./routes/index');
 var campaignRouter = require('./routes/campaigns');
 var donationRouter = require('./routes/donations');
 var usersRouter = require('./routes/users');
 
+var session = require('express-session');
+var MongoStore = require('connect-mongo');
+var { v4: uuidv4 } = require('uuid');
+
 var app = express();
 
 // CONNECT to MongoDB via Mongoose
-mongoose.connect(process.env.MONGO_URI, {
+const mongoosePromise = mongoose.connect(process.env.MONGO_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true
 })
-.then( () => console.log('MongoDB Connected!') )
+.then( m => m.connection.getClient() )
 .catch( err => console.log(err) );
+
+// Set up Session
+app.use(session({
+  genid: (req) => {
+      console.log(req.sessionID);
+      return uuidv4();
+  },
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 * 2 },
+  store: MongoStore.create({
+      clientPromise: mongoosePromise
+    })
+  })
+);
+
+//Initialize Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+// Login / logout Views
+app.use(function (req, res, next ) {
+    if (req.isAuthenticated()) {
+        app.set('view options', { layout: 'layout_user'});
+    } else {
+        app.set('view options', { layout: 'layout'});
+    }
+    return next();
+});
 
 app.use(logger('dev'));
 app.use(express.json());
