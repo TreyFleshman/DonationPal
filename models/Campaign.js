@@ -20,6 +20,10 @@ const CampaignSchema = new Schema( {
         type: Number,
         required: true
     },
+    progress: {
+        type: Number,
+        required: true
+    },
     start_date: {
         type: String,
         required: true,

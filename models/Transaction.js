@@ -2,19 +2,18 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Create Schema
-const DonationSchema = new Schema( {
-     rel_id: {
+const TransactionSchema = new Schema( {
+     rel_campaign_id: {
         type: Schema.Types.ObjectId,
         ref: "Campaign"
+    },
+    rel_donation_id:{
+        type: Schema.Types.ObjectId,
+        ref: "Donation"
     },
     creator_id: {
         type: String,
         required: true
-    },
-    message: {
-        type: String,
-        required: true,
-        trim: true
     },
     don_amt: {
         type: Number,
@@ -23,7 +22,13 @@ const DonationSchema = new Schema( {
     date: {
         type: String,
         default: Date.now
+    },
+    charge: {
+        type: Object
+    },
+    customer:{
+        type: Object
     }
 } );
 
-mongoose.model('Donations', DonationSchema);
+mongoose.model('Transactions', TransactionSchema);

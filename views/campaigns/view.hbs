@@ -9,6 +9,12 @@
     <h6 class="list-group-item"><b>Funding Goal:</b> ${{ campaign.goal }}</h6>
     <h6 class="list-group-item"><b>Campaign Start Date:</b> {{ campaign.start_date }}</h6>
     <h6 class="list-group-item"><b>Campaign End Date:</b> {{ campaign.end_date }}</h6>
+    <h6 class="list-group-item" style="text-align: center;"><b>Progress</b> <br><br>
+     <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: {{prog_precent}}%;" aria-valuenow="{{prog_precent}}%" aria-valuemin="0" aria-valuemax="100">${{campaign.progress}} of ${{campaign.goal}}</div>
+     </div> <br>
+     <p class="text-muted">Remaining: ${{remaining}}</p>
+     </h6>    
     <h6 class="list-group-item">
     <a class="btn btn-primary donate-btn" href="/donations/add" style="border-radius: 20px;">
       <img src="../images/add.png" style="height: 24px; width: 24px; float: left;"/>
@@ -32,15 +38,15 @@
             <th scope="col"></th>
         </tr>
     </thead>
-    {{#each donationList}}
+    {{#donationList}}
         <tbody>
             <tr>
                 <th scope="row">{{message}}</th>
-                <td>${{don_amt}}.00</td>
+                <td>${{don_amt}}</td>
                 <td><a href="/donations/view?_id={{ this._id }}">
                     <img src="../images/open-link.png" style="height: 24px; width: 24px;"/>
                 </a></td>
             </tr>
         </tbody>
-    {{/each}}
+    {{/donationList}}
 </table>
