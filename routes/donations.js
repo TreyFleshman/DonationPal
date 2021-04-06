@@ -91,8 +91,10 @@ router.post('/save', ensureAuth, async (req,res,next) => {
       var filter = {_id: req.body.rel_id };
       Campaign.findOne(filter)
       .then(campaign => {
-      var x = campaign.progress
-      var update = { progress: parseInt(x) + parseFloat(req.body.don_amt, 2) }; 
+      var x = campaign.progress;
+      var uptX = parseInt(x) + parseFloat(req.body.don_amt, 2);
+      var y = (uptX / campaign.goal) * 100;
+      var update = { progress: uptX, progressBar: parseInt(y)}; 
       Campaign.findOneAndUpdate(filter, update)
       .catch( err => console.log(err) ) 
       })
@@ -101,7 +103,10 @@ router.post('/save', ensureAuth, async (req,res,next) => {
       var charge = await createCharge(req.body.don_amt, req.body.message, customer, req.body.rel_id, req.user.providerID);
       const newDonation = new Donation( {
           rel_id: req.body.rel_id,
-          creator_id: req.user.providerID,
+          user:{
+              creator_id: req.user.providerID,
+              displayName: req.user.displayName
+          },
           message: req.body.message,
           don_amt: parseFloat(req.body.don_amt, 2),
           date: dateFormat(req.body.date, "fullDate"),

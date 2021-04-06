@@ -11,11 +11,12 @@
 
 <br/>
 
-<table class="table" style="width: 500px; margin: auto" >
+<table class="table" style="width: 800px; margin: auto" >
     <thead>
         <tr>
             <th scope="col">Title</th>
             <th scope="col">Funding Goal</th>
+            <th scope="col">Progress</th>
             <th scope="col"></th>
         </tr>
     </thead>
@@ -23,7 +24,12 @@
         <tbody>
             <tr>
                 <th scope="row">{{title}}</th>
-                <td>${{goal}}.00</td>
+                <td>${{goal}}</td>
+                <td>
+                    <div class="progress" style="width: 125px;;">
+                        <div class="progress-bar" role="progressbar" style="width: {{progressBar}}%;" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100">${{progress}}</div>
+                    </div> <br>
+                </td>
                 <td><a href="campaigns/view?_id={{ this._id }}">
                     <img src="../images/open-link.png" style="height: 24px; width: 24px;"/>
                 </a></td>

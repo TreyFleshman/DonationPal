@@ -30,23 +30,18 @@
 
 <br/>
 
-<table class="table" style="width: 500px; margin: auto" >
-    <thead>
-        <tr>
-            <th scope="col">Message</th>
-            <th scope="col">Donation Amount</th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
+<div style="width: 32rem; margin:auto;">
     {{#donationList}}
-        <tbody>
-            <tr>
-                <th scope="row">{{message}}</th>
-                <td>${{don_amt}}</td>
-                <td><a href="/donations/view?_id={{ this._id }}">
-                    <img src="../images/open-link.png" style="height: 24px; width: 24px;"/>
-                </a></td>
-            </tr>
-        </tbody>
+    <div class="alert alert-primary" role="alert">
+        <div class="d-flex justify-content-between" >
+            <h4 style="padding: 3px;">
+                <i>{{user.displayName}}</i> donated <b> ${{don_amt}} !</b> 
+            </h4>
+                <a href="/donations/view?_id={{ this._id }}">
+                  <img src="../images/open-link.png" style="height: 36px; width: 36px; float:right;"/>
+                </a>
+            
+        </div>
+    </div>
     {{/donationList}}
-</table>
+</div>

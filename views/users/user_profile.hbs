@@ -27,7 +27,7 @@
             <tbody>
                 <tr>
                 <th scope="row">{{title}}</th>
-                <td>${{goal}}.00</td>
+                <td>${{goal}}</td>
                 <td><a href="/campaigns/user-view?_id={{ this._id }}">
                 <img src="../images/open-link.png" style="height: 24px; width: 24px;"/>
                 </a></td>
@@ -54,8 +54,8 @@
             <tbody>
               <tr>
                 <th scope="row">{{message}}</th>
-                <td>${{don_amt}}.00</td>
-                <td><a href="/donations/view?_id={{ this._id }}">
+                <td>${{don_amt}}</td>
+                <td><a href="/donations/confirmation?_id={{ this._id }}">
                     <img src="../images/open-link.png" style="height: 24px; width: 24px;"/>
                 </a></td>
               </tr>

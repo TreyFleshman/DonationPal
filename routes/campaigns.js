@@ -27,7 +27,10 @@ router.get('/', (req, res, next) => {
   Campaign.find({})
   .sort({start_date: 'asc'})
   .then( campaigns => {
-    res.render('campaigns/index', { title: "Listed Campaigns", campaignlist: campaigns})
+    res.render('campaigns/index',{
+      title: "Listed Campaigns",
+      campaignlist: campaigns,
+    })
   });
 });
 
@@ -39,24 +42,16 @@ router.get('/view', (req, res, next) => {
     var prog_precent = (campaign.progress / campaign.goal) * 100;
     prog_precent = prog_precent.toFixed(2);
     var remaining = campaign.goal - campaign.progress;
-    console.log(prog_precent);
     Donation.find({ rel_id: req.query._id })
-    .then( donations => {
-      for(i=0;i<donations.length;i++){
-      var id = donations[i].creator_id;
-      }
-      User.find({providerID: id})     
-      .then(users=> {             
-        res.render('campaigns/view', {
-          title: campaign ? campaign.title: "",
-          key: req.query._id,
-          prog_precent,
-          remaining,
-          users: users,
-          campaign: campaign,
-          donationList: donations
-        });
-      })      
+    .then( donations => {             
+      res.render('campaigns/view', {
+        title: campaign ? campaign.title: "",
+        key: req.query._id,
+        prog_precent,
+        remaining,
+        campaign: campaign,
+        donationList: donations
+      });     
     })
   })
 });
@@ -80,7 +75,7 @@ router.get('/user-view', (req, res, next) => {
 /* GET sinlge campaign THEN Update Document */
 router.get('/update', ensureAuth, (req, res, next) => {
 
-  Campaign.findOne({
+  Campaign.findOneAndUpdate({
       _id: req.query._id
   })
   
@@ -100,7 +95,6 @@ router.post('/save-update', ensureAuth, (req, res, next) => {
         title: req.body.title,
         desc: req.body.desc,
         goal: req.body.goal,
-        progress: req.query.progress,
         start_date: dateFormat(req.body.start_date, "fullDate"),
         end_date: dateFormat(req.body.end_date, "fullDate")
     })
@@ -142,6 +136,7 @@ router.post('/save', ensureAuth, (req,res,next) => {
           desc: req.body.desc,
           goal: req.body.goal,
           progress: 0,
+          progressBar: 0,
           start_date: dateFormat(req.body.start_date, "fullDate"),
           end_date: dateFormat(req.body.end_date, "fullDate")
       } );

@@ -7,9 +7,14 @@ const DonationSchema = new Schema( {
         type: Schema.Types.ObjectId,
         ref: "Campaign"
     },
-    creator_id: {
-        type: String,
-        required: true
+    user:{
+        displayName:{
+          type: String,
+          default: "Anonymous"
+       },
+        creator_id: {
+          type: String,
+       }
     },
     message: {
         type: String,
