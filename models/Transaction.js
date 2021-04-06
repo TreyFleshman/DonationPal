@@ -13,7 +13,7 @@ const TransactionSchema = new Schema( {
     },
     creator_id: {
         type: String,
-        required: true
+        default: "Anonymous"
     },
     don_amt: {
         type: Number,

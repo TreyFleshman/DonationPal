@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
     loggedInUser = req.user;
     Campaign.find({ 'creator_id': req.user.providerID })
     .then( campaigns =>  { 
-      Donation.find({ 'creator_id': req.user.providerID })
+      Donation.find({ 'user.creator_id': req.user.providerID })
       .then( donations => {
         res.render('users/user_profile', {
         title: 'Profile',
