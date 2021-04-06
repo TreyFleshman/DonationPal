@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const campaigns = require('../models/campaigns-memory');
 const dateFormat = require('dateformat');
-var location = require('location-href');
+const stripe = require('stripe')(process.env.STRIPE_API_KEY);
 
 const mongoose = require('mongoose');
 require('../models/Donation');
@@ -59,15 +58,19 @@ router.get('/add', ensureAuth, (req, res, next) => {
 });
 
 /* POST */
-router.post('/save', ensureAuth, (req,res,next) => {
+router.post('/save', ensureAuth, async (req,res,next) => {
   if (req.body.docreate === 'create') {
       console.log('Submitting a new donation!')
+      var customer = await createCustomer(req);
+      var charge = await createCharge(req.body.don_amt, req.body.message, customer, req.body.rel_id);
       const newDonation = new Donation( {
           rel_id: req.body.rel_id,
           creator_id: req.user.providerID,
           message: req.body.message,
           don_amt: req.body.don_amt,
           date: dateFormat(req.body.date, "fullDate"),
+          customer: customer,
+          charge: charge,
       } );
       newDonation
       .save()
@@ -83,3 +86,26 @@ router.post('/save', ensureAuth, (req,res,next) => {
 
 
 module.exports = router;
+
+//Helper Functions
+const createCustomer = async function(req) {
+    var customer = await stripe.customers.create({
+        name: req.user.firstName + ' ' + req.user.lastName,
+        email: req.user.email,
+        source: req.body.stripeToken
+    });
+    return customer;
+};
+
+const createCharge = async function(amount, message, customer, campaign_id) {
+    var charge = await stripe.charges.create({
+       amount: amount*100,
+       currency: 'usd',
+       customer: customer.id,
+       description: message,
+       metadata: {
+           campaign_id: campaign_id
+       } 
+    });
+    return charge;
+};

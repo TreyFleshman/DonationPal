@@ -23,6 +23,12 @@ const DonationSchema = new Schema( {
     date: {
         type: String,
         default: Date.now
+    },
+    charge: {
+        type: Object
+    },
+    customer:{
+        type: Object
     }
 } );
 
