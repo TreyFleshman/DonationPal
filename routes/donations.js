@@ -26,7 +26,7 @@ router.get('/', (req, res, next) => {
 
   Donation.find({})
   .sort({date: 'asc'})
-  .then( donations => {
+  .then( donations => {      
     res.render('donations/index', { title: "Submited Donations", donationlist: donations})
   });
 });

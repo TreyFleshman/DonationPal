@@ -1,7 +1,6 @@
-<h1>{{ title }}</h1>
-
-<a class="btn btn-primary" href="/campaigns/add" style="border-radius: 20px;">
-    <img src="../images/add.png" style="height: 24px; width: 24px;"/>
+<h1  class="d-inline p-2" >{{title}}</h1>
+<a class="btn btn-primary" href="/donations/add" style="border-radius: 40px; float:right; font-size: 22px;">
+    <img src="../images/add.png" style="height: 28px; width: 28px;"/>
     Add Listing
 </a>
 
@@ -11,29 +10,29 @@
 
 <br/>
 
-<table class="table" style="width: 800px; margin: auto" >
-    <thead>
-        <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Funding Goal</th>
-            <th scope="col">Progress</th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
+<div class="gap-3 d-flex" style="flex-wrap: wrap; margin-left:200px; margin-right:200px;">
+
     {{#each campaignlist}}
-        <tbody>
-            <tr>
-                <th scope="row">{{title}}</th>
-                <td>${{goal}}</td>
-                <td >
-                    <div class="progress" style="width: 125px;">
-                        <div class="progress-bar" role="progressbar" style="width: {{progressBar}}%;">${{progress}}</div>
-                    </div><br>
-                </td>
-                <td><a href="campaigns/view?_id={{ this._id }}">
-                    <img src="../images/open-link.png" style="height: 24px; width: 24px;"/>
-                </a></td>
-            </tr>
-        </tbody>
+    <div class="card dm" style="width: 25rem; margin: auto; text-align: center;">
+        <div class="card-header bg-dark text-light">
+            <h4 class="d-inline position-relative" style="right:-12px;">{{title}}</h4>
+            <a href="campaigns/view?_id={{ this._id }}" style="float: right;">
+            <img src="../images/open-link.png" style="height: 24px; width: 24px;"/>
+            </a>
+        </div>
+
+        <div class="card-body bg-dark text-light">
+            <p style="font-size: 16px;">Funding Goal - ${{goal}}</p>
+            <p style="font-size: 16px;">Funding Progress - ${{progress}}</p>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: {{progressBar}}%;">{{progressBar}}%</div>
+            </div>
+        </div>
+
+        <div class="card-footer bg-dark text-light">
+           <p><i>Campaign closing - {{end_date}}</i></p> 
+        </div>        
+    </div>
     {{/each}}
-</table>
+
+</div>

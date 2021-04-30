@@ -1,47 +1,55 @@
 <br/>
 
 <div class="card dm" style="width: 28rem; margin: auto;">
-  <div class="card-header" style="text-align: center;">
+
+  <div class="card-header bg-dark text-light" style="text-align: center;">
     <h2>{{ title }}</h2>
   </div>
-  <ul class="list-group list-group-flush">
-    <h6 class="list-group-item"><b>Description:</b>  {{ campaign.desc }}</h6>
-    <h6 class="list-group-item"><b>Funding Goal:</b> ${{ campaign.goal }}</h6>
-    <h6 class="list-group-item"><b>Campaign Start Date:</b> {{ campaign.start_date }}</h6>
-    <h6 class="list-group-item"><b>Campaign End Date:</b> {{ campaign.end_date }}</h6>
-    <h6 class="list-group-item" style="text-align: center;"><b>Progress</b> <br><br>
-     <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: {{prog_precent}}%;" aria-valuenow="{{prog_precent}}%" aria-valuemin="0" aria-valuemax="100">${{campaign.progress}} of ${{campaign.goal}}</div>
-     </div> <br>
-     <p class="text-muted">Remaining: ${{remaining}}</p>
-     </h6>    
-    <h6 class="list-group-item">
+
+  <div class="card-body bg-dark text-light" style="text-align: center; margin; auto;">
+
+    <h6><q>{{ campaign.desc }}</q></h6>
+    <h6>Funding Goal - ${{campaign.goal}}</h6>
+    <h6>Campaign Opened - <i>{{ campaign.start_date }}</i></h6>
+
+    <hr style="color: white;">
+
+    <h5><b>Progress</b></h4> <br>
+    <h6>${{campaign.progress}} Donated </h6>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: {{prog_precent}}%;" aria-valuenow="{{prog_precent}}%" aria-valuemin="0" aria-valuemax="100">{{campaign.progressBar}}%</div>
+    </div><br>
+
+    <h6>Remaining: ${{remaining}}</h6>
+
+    <hr style="color: white;"> 
+
+    <p><i>Campaign Closes - {{campaign.end_date}}</i></p>
+
+  </div> 
+
+  <div class="card-footer bg-dark text-light">
     <a class="btn btn-primary donate-btn" href="/donations/add" style="border-radius: 20px;">
-      <img src="../images/add.png" style="height: 24px; width: 24px; float: left;"/>
-        Donate
-    </a>
-    </h6>
-  </ul>
+    <img src="../images/add.png" style="height: 24px; width: 24px; float: left;"/>Donate</a>
+  </div>
+
 </div>
 
 <br/>
 
-<h3 style="text-align: center;">Donations</h3>
+<div style="width: 30rem; margin:auto;">
 
-<br/>
-
-<div style="width: 32rem; margin:auto;">
     {{#donationList}}
-    <div class="alert alert-primary" role="alert">
-        <div class="d-flex justify-content-between" >
-            <h4 style="padding: 3px;">
-                <i>{{user.displayName}}</i> donated <b> ${{don_amt}} !</b> 
-            </h4>
-                <a href="/donations/view?_id={{ this._id }}">
-                  <img src="../images/open-link.png" style="height: 36px; width: 36px; float:right;"/>
-                </a>
-            
-        </div>
+    <div class="alert alert-primary" role="alert" style="border-radius:25px;">
+      <div class="d-flex justify-content-between" >
+        <h4 style="padding: 3px;">
+          <i>{{user.displayName}}</i> donated <b> ${{don_amt}} !</b> 
+        </h4>
+        <a href="/donations/view?_id={{ this._id }}">
+          <img src="../images/open-link.svg" style="height: 32px; width: 32px; float:right;"/>
+        </a>  
+      </div>
     </div>
     {{/donationList}}
+
 </div>

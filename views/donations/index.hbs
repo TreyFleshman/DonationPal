@@ -1,9 +1,9 @@
-<h1>{{title}}</h1>
-
-<a class="btn btn-primary" href="/donations/add" style="border-radius: 20px;">
-    <img src="../images/add.png" style="height: 24px; width: 24px;"/>
+<h1  class="d-inline p-2" >{{title}}</h1>
+<a class="btn btn-primary" href="/donations/add" style="border-radius: 40px; float:right; font-size: 22px; width: 150px;">
+    <img src="../images/add.png" style="height: 28px; width: 28px;"/>
     Donate
 </a>
+
 
 <br/> <br/>
 
@@ -11,25 +11,34 @@
 
 <br/>
 
-<table class="table" style="width: 600px; margin: auto" >
-    <thead>
-        <tr>
-            <th scope="col">User</th>
-            <th scope="col">Message</th>
-            <th scope="col">Donation Amount</th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
+<div class="gap-3 d-flex" style="flex-wrap: wrap; margin-left: 200px; margin-right: 200px;"> 
+
     {{#each donationlist}}
-        <tbody>
-            <tr>
-                <th scope="row">{{user.displayName}}</th>
-                <td>{{message}}</td>
-                <td>${{don_amt}}</td>
-                <td><a href="/donations/view?_id={{ this._id }}">
-                    <img src="../images/open-link.png" style="height: 24px; width: 24px;"/>
-                </a></td>
-            </tr>
-        </tbody>
+    <div class="card dm" style="width: 18rem; margin: auto; text-align: center;">
+
+      <div class="card-header bg-dark text-light">
+        <h2 class="d-inline position-relative" style="right:-12px;">Donation</h2>
+        <a href="/donations/view?_id={{ this._id }}" style="float: right;">
+          <img src="../images/open-link.png" style="height: 24px; width: 24px;"/>
+        </a>
+        <p><i><b>{{user.displayName}}</b> made a donation!</b></i></p>
+        <div class="d-inline p-3">
+            <img src="../images/dollar-sign.png" style="height: 25px; width: 24px;"/>
+            <img src="../images/dollar-sign.png" style="height: 25px; width: 24px;"/>
+            <img src="../images/dollar-sign.png" style="height: 25px; width: 24px;"/>
+            <img src="../images/dollar-sign.png" style="height: 25px; width: 24px;"/>
+            <img src="../images/dollar-sign.png" style="height: 25px; width: 24px;"/>            
+        </div>
+      </div>
+
+    <div class="bg-dark text-light" style="font-size: 16px;">
+        <br>
+        <p class=""><b> Amount:</b> ${{ don_amt }}</p>
+        <p class=""><q><i> {{ message }} </i></q></p>
+        </div>
+        <div class="card-footer bg-dark text-light">
+        <p><i> Donated on - {{ date }}</i></p>
+        </div>
+    </div>
     {{/each}}
-</table>
+</div>

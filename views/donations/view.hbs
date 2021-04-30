@@ -1,13 +1,26 @@
 <br/>
 
-<div class="card dm" style="width: 28rem; margin: auto;">
-  <div class="card-header" style="text-align: center;">
+<div class="card dm" style="width: 28rem; margin: auto; text-align: center;">
+  <div class="card-header bg-dark text-light">
     <h2>Donation</h2>
-    <p class="text-muted"><i>{{transaction.customer.name}} to <b>{{campaign.title}}</b></i></p>
+    <p><i>{{transaction.customer.name}} donated to <b>{{campaign.title}}</b></i></p>
+    <div class="d-inline p-3">
+      <img src="../images/dollar-sign.png" style="height: 26px; width: 24px;"/>
+      <img src="../images/dollar-sign.png" style="height: 26px; width: 24px;"/>
+      <img src="../images/dollar-sign.png" style="height: 26px; width: 24px;"/>
+      <img src="../images/dollar-sign.png" style="height: 26px; width: 24px;"/>
+      <img src="../images/dollar-sign.png" style="height: 26px; width: 24px;"/>
+      <img src="../images/dollar-sign.png" style="height: 26px; width: 24px;"/>
+      <img src="../images/dollar-sign.png" style="height: 26px; width: 24px;"/>            
+    </div>
   </div>
-  <ul class="list-group list-group-flush">
-    <h6 class="list-group-item"><b>Message:</b>  {{ donation.message }}</h6>
-    <h6 class="list-group-item"><b>Donation Amount:</b> ${{ donation.don_amt }}</h6>
-    <h6 class="list-group-item"><b>Donation Date:</b> {{ donation.date }}</h6>
-  </ul>
+
+  <div class="bg-dark text-light" style="font-size: 16px;">
+    <br>
+    <p class=""><b> Amount:</b> ${{ donation.don_amt }}</p>
+    <p class=""><q><i> {{ donation.message }} </i></q></p>
+    </div>
+    <div class="card-footer bg-dark text-light">
+    <p><i> Donated on - {{ donation.date }}</i></p>
+  </div>
 </div>
