@@ -50,4 +50,15 @@
 - Campaigns and Donations now store the users ID
 - Certain features now require a user to be logged in
 
+# Sprint 9
 
+- Added Stripe Payment Processing API intergration
+- Added a 'Confirmation' page that displays after a donation is made
+- Created an 'Order' collection in MongoDB that stores users transactions
+
+# Sprint 10
+
+- Campaigns progress bar will be updated after a donation to the campaign is made
+- Campaigns funding goal, total funding so far and remainding funding is displayed
+- Added a list of donations made to that campaign, on the campaigns view page
+- Donation tags display the users display name for who submited the donation
